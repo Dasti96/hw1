@@ -1,6 +1,6 @@
 const cart_container = document.querySelector('#container_cart');
 cart_container.parentElement.classList.add('hidden');
-orders_button = document.querySelector('#show_orders'); 
+const orders_button = document.querySelector('#show_orders'); 
 const modal = document.querySelector('#modal');
 
 function onResponse(response){
@@ -12,17 +12,13 @@ function onResponse(response){
         console.log('errore! impossibile recuperare il json');        
 }
 
-function onClickDelete(event){
-   
+function onClickDelete(event){   
     console.log(event.currentTarget.parentElement.dataset.index);
-    cart = cart_container.querySelector('#cart');
-    cart.innerHTML='';
-    fetch('deleteFromCart.php?index_prod='+encodeURI(event.currentTarget.parentElement.dataset.index));    
-    fetch('cartHandler.php').then(onResponse).then(cartAddElem);
+    cart = cart_container.querySelector('#cart');    
+    fetch('deleteFromCart.php?index_prod='+encodeURI(event.currentTarget.parentElement.dataset.index)).then(fetch('cartHandler.php').then(onResponse).then(cartAddElem));    
 }
 
 function cartAddElem(json){    
-    
     cart = cart_container.querySelector('#cart');
     cart.innerHTML='';   
     for(let i = 0; i < json.length; i++){ 
@@ -59,16 +55,13 @@ function cartAddElem(json){
 function onClickAddCart(event){   
     const num_count = parseInt(event.currentTarget.parentElement.querySelector('.counter').textContent);
     if(num_count === 0)          
-        return;   
+        return;
 
-    
     const prod_img = event.currentTarget.parentElement.querySelector('img');
     const prod_title = event.currentTarget.parentElement.querySelector('.title');
     const counter = parseInt(event.currentTarget.parentElement.querySelector('.counter').textContent);
    
-    fetch('cartHandler.php?title='+prod_title.textContent+'&quantity='+counter+'&img='+prod_img.src).then(onResponse).then(cartAddElem);    
-    
-    
+    fetch('cartHandler.php?title='+prod_title.textContent+'&quantity='+counter+'&img='+prod_img.src).then(onResponse).then(cartAddElem);
 }
 
 function verifyLogin(json){   
@@ -140,13 +133,12 @@ function showOrdersClick(json){
         fetch('ordersHandler.php').then(onResponse).then(ordersShow);
     }else 
         location.href = "hw1_login.php";
-
     
     showModal();   
 }
 
 
-function onShowOrdersClick(json){   
+function onShowOrdersClick(){   
     fetch('log_shopHandler.php').then(onResponse).then(showOrdersClick)    
     
 }

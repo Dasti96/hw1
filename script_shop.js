@@ -1,10 +1,3 @@
-const vec_minus = [];
-const vec_plus = [];
-const vec_add_carts = [];
-const vec_counters = [];
-const vec_products = [];
-const vec_descrs = [];
-
 const article = document.querySelector('article');
 const search = document.querySelector('#search');
 const game_apiKey = 'e45669b248164efc9ebdc1962df2a0e9';
@@ -55,6 +48,7 @@ function onJson(json){
 
         add_cart.classList.add('add_cart');
         add_cart.addEventListener('click',onClickAddCart);
+        descr.addEventListener('click',onClickDescr);
 
         descr.textContent = product.genres[0].name;
         minus.textContent = product_menu.minus;
@@ -64,17 +58,10 @@ function onJson(json){
        
         div_prod.appendChild(descr_button);
         div_prod.appendChild(descr);
-        div_prod.appendChild(minus);
-        div_prod.appendChild(counter);
         div_prod.appendChild(plus);
+        div_prod.appendChild(counter);
+        div_prod.appendChild(minus);
         div_prod.appendChild(add_cart);
-
-        vec_counters.push(counter);
-        vec_minus.push(minus);
-        vec_plus.push(plus);
-        vec_add_carts.push(add_cart);
-        vec_products.push(div_prod);
-        vec_descrs.push(descr_button);
     }   
 
 }
@@ -120,14 +107,9 @@ function onClickMinus(event){
     let numb = parseInt(counter.textContent) - 1;
     counter.textContent = numb;
 }
-var var_prodSearched = [];
 
 function onClickDescr(event){  
     const parent = event.currentTarget.parentElement;
     parent.querySelector('.descr').classList.remove('hidden');
     parent.querySelector('.descr_button').classList.add('hidden');
-}
-
-for(descr of vec_descrs){
-    descr.addEventListener('click',onClickDescr);
 }

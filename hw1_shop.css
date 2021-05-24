@@ -11,16 +11,6 @@ body{
     overflow-y: hidden;
 }
 
-
-/*header{   
-    background-image: url("Area_IconHeader_Sys_Prog_11_2019_1920x7204.png");
-    background-size: cover;   
-    position: relative; 
-    height: 500px;       
-    margin-bottom: 15px;  
-    z-index: -1;  
-}*/
-
 article{    
     height: max-content;    
     width: 100%;    
@@ -236,9 +226,9 @@ footer a:link{
 
 
 #modal{   
-    color: black;   /**/
+    color: black;   
     display: flex;
-    flex-direction: column; /**/
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     background-color: rgba(0,0,0,0.5);
